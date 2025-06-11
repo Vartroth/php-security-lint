@@ -30,13 +30,16 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpSecurityLint\\": "src/",
+            "PhpSecurityLint\\": [
+                "src/",
+                "src"
+            ],
             "PhpSecurityLint\\Console\\": "src/Console"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PhpSecurityLint\\Tests\\": "tests/"
+            "PhpSecurityLint\\Tests\\": "tests/src/"
         }
     },
     "bin": [

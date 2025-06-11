@@ -19,9 +19,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     description: 'Lint PHP files for insecure functions',
     help: 'This command scans PHP files for potentially insecure functions like var_dump, exec, eval, etc.'
 )]
-/**
- * @testFunction testLintCommand
- */
 class LintCommand extends Command
 {
     protected function configure(): void
@@ -59,7 +56,7 @@ class LintCommand extends Command
             )
             ->addOption(
                 'exclude-functions',
-                'ef',
+                'e',
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'Disable linting for specific functions (e.g., var_dump, print_r)'
             );
