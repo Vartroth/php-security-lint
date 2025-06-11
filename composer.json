@@ -1,0 +1,56 @@
+{
+    "name": "vartroth/php-security-lint",
+    "description": "A PHP security linter to detect insecure functions like var_dump, print_r, and other dangerous functions in your codebase",
+    "type": "library",
+    "version": "0.1.0",
+    "keywords": [
+        "php",
+        "security",
+        "linter",
+        "static-analysis",
+        "code-quality",
+        "debugging"
+    ],
+    "homepage": "https://github.com/vartroth/php-security-lint",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Gonzalez",
+            "email": "info.agonzalez@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "symfony/console": "^7.3",
+        "symfony/finder": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.2",
+        "squizlabs/php_codesniffer": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpSecurityLint\\": "src/",
+            "PhpSecurityLint\\Console\\": "src/Console"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpSecurityLint\\Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "bin/php-security-lint"
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "XDEBUG_MODE=coverage phpunit --coverage-html coverage",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

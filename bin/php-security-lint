@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+declare (strict_types = 1);
+
+use PhpSecurityLint\Console\LintCommand;
+use Symfony\Component\Console\Application;
+
+$possibleAutoloaders = [
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
+    __DIR__ . '/../../autoload.php',
+    __DIR__ . '/../autoload.php',
+];
+
+$autoloader = null;
+foreach ($possibleAutoloaders as $possibleAutoloader) {
+    if (file_exists($possibleAutoloader)) {
+        $autoloader = $possibleAutoloader;
+        break;
+    }
+}
+
+if (! $autoloader) {
+    fwrite(STDERR, "Could not find autoloader. Please run 'composer install'.\n");
+    exit(1);
+}
+
+require_once $autoloader;
+
+$application = new Application('PHP Security Lint', '1.0.0');
+$application->add(new LintCommand());
+$application->setDefaultCommand('lint', true);
+$application->run();

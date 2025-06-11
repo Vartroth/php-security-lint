@@ -1,0 +1,38 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
+/coverage/
+phpunit-coverage.xml
+phpunit-report.xml
+
+# Logs
+*.log
+
+# Cache
+cache/
+tmp/
+temp/
+
+# Node.js (if using for build tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
