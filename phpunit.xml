@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         cacheDirectory=".phpunit.cache"
-         executionOrder="depends,defects"
-         colors="true">
+         colors="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         stopOnFailure="false"
+         cacheDirectory=".phpunit.cache">
+
     <testsuites>
-        <testsuite name="Test Case">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="PHP Security Lint Test Suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-    <!-- Configuración de archivos fuente para cobertura -->
     <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory>src</directory>
         </include>
         <exclude>
-            <directory>./vendor</directory>
-            <directory>./tests</directory>
+            <directory>vendor</directory>
         </exclude>
     </source>
+
+    <!--
+    <coverage>
+        <report>
+            <html outputDirectory="coverage" lowUpperBound="50" highLowerBound="80"/>
+            <clover outputFile="coverage/clover.xml"/>
+            <text outputFile="php://stdout" showUncoveredFiles="true"/>
+        </report>
+    </coverage>
+    -->
+
+    <logging>
+        <junit outputFile="coverage/junit.xml"/>
+    </logging>
 </phpunit>

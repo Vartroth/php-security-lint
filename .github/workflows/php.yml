@@ -9,27 +9,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3']
-    
+
     name: PHP ${{ matrix.php-version }} Tests
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
         extensions: mbstring, xml, ctype, json, tokenizer
         coverage: xdebug
-    
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
-    
+
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -38,19 +38,19 @@ jobs:
         key: ${{ runner.os }}-php-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-${{ matrix.php-version }}-
-    
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    
+
     - name: Run PHPUnit tests
       run: composer run-script test
-    
+
     - name: Run Code Style Check
       run: composer run-script cs-check
-    
+
     - name: Generate test coverage
       run: composer run-script test-coverage
-    
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -62,22 +62,22 @@ jobs:
   security-analysis:
     runs-on: ubuntu-latest
     name: Security Analysis
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
         extensions: mbstring, xml, ctype, json, tokenizer
-    
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    
+
     - name: Run Security Advisories Check
       run: composer audit
-    
+
     - name: Test our own security linter
       run: ./bin/php-security-lint src/ tests/
